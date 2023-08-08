@@ -1,6 +1,6 @@
 import 'package:flash_chat/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flash_chat/services/elevationButton.dart';
+import 'package:flash_chat/components/elevationButton.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static String id = 'register';
