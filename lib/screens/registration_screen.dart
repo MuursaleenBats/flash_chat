@@ -37,7 +37,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             TextField(
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
-                  //Do something with the user input.
                   email = value;
                 },
                 textAlign: TextAlign.center,
@@ -49,7 +48,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             TextField(
                 obscureText: true,
                 onChanged: (value) {
-                  //Do something with the user input.
                   password = value;
                 },
                 textAlign: TextAlign.center,
