@@ -65,7 +65,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         'Flash Chat',
                         textStyle: TextStyle(
                           fontWeight: FontWeight.w900,
-                          fontSize: 50.0,
+                          fontSize: 48.0,
                         ),
                         speed: const Duration(milliseconds: 300),
                       ),
