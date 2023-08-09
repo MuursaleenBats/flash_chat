@@ -1,4 +1,5 @@
 import 'package:flash_chat/components/elevationButton.dart';
+import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,8 +11,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _auth = FirebaseAuth.instance;
   late String email;
   late String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
             TextField(
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
-                  //Do something with the user input.
                   email = value;
                 },
                 textAlign: TextAlign.center,
@@ -47,7 +49,6 @@ class _LoginScreenState extends State<LoginScreen> {
             TextField(
                 obscureText: true,
                 onChanged: (value) {
-                  //Do something with the user input.
                   password = value;
                 },
                 textAlign: TextAlign.center,
@@ -57,9 +58,16 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 24.0,
             ),
             ElevationButton(
-              onPressed: () {
-                print(email);
-                print(password);
+              onPressed: () async {
+                try {
+                  final user = await _auth.signInWithEmailAndPassword(
+                      email: email, password: password);
+                  if (user != null) {
+                    Navigator.pushNamed(context, ChatScreen.id);
+                  }
+                } catch (e) {
+                  print(e);
+                }
               },
               color: Colors.lightBlueAccent,
               text: 'Log In',
