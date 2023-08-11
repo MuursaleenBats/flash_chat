@@ -78,18 +78,23 @@ class _ChatScreenState extends State<ChatScreen> {
                     );
                   }
                   final messages = snapshot.data?.docs;
-                  List<Text> messageWidgets = [];
+                  List<MessageBubble> messageWidgets = [];
                   if (messages != null) {
                     for (var message in messages) {
                       final messageText = message.data()['text'];
                       final messageSender = message.data()['sender'];
-                      final messageWidget =
-                          Text('$messageText from $messageSender');
+                      final messageWidget = MessageBubble(
+                          messageSender: messageSender,
+                          messageText: messageText);
                       messageWidgets.add(messageWidget);
                     }
-                    return (Column(
-                      children: messageWidgets,
-                    ));
+                    return Expanded(
+                      child: (ListView(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 20.0),
+                        children: messageWidgets,
+                      )),
+                    );
                   } else {
                     return (Column(
                       children: [],
@@ -127,5 +132,23 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
       ),
     );
+  }
+}
+
+class MessageBubble extends StatelessWidget {
+  MessageBubble({required this.messageSender, required this.messageText});
+  final String messageText;
+  final String messageSender;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      '$messageText from $messageSender',
+      style: TextStyle(
+        fontSize: 50.0,
+        backgroundColor: Colors.lightBlueAccent,
+      ),
+    );
+    ;
   }
 }
