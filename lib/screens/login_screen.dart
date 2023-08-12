@@ -79,7 +79,24 @@ class _LoginScreenState extends State<LoginScreen> {
                       showSpinner = false;
                     });
                   } catch (e) {
-                    print(e);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.red,
+                      content: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Text(
+                          "Wrong email or password",
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ));
+                    setState(() {
+                      showSpinner = false;
+                    });
                   }
                 },
                 color: Colors.lightBlueAccent,
